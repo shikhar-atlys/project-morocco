@@ -8,14 +8,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { MapPin, Calendar, ChevronDown } from "lucide-react";
+import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col font-inter">
       {/* Header */}
-      <header className="p-4 px-6 md:px-20 flex justify-between items-center border-b">
+      <header className="py-4 px-6 md:px-20 flex justify-between items-center border-b">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
@@ -29,54 +29,38 @@ export default function Home() {
           </Link>
         </div>
         
-        {/* Center text */}
-        <div className="hidden md:flex items-center gap-2">
-          <span className="text-gray-600">Apply visa to</span>
-          <div className="flex items-center gap-1">
-            <Image 
-              src="/morocco-flag.svg" 
-              alt="Morocco flag" 
-              width={24} 
-              height={16}
-              className="rounded-sm"
-            />
-            <span className="font-medium">Morocco from India</span>
-          </div>
-        </div>
-        
         {/* Action buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Button
             variant="outline"
-            className="text-black border-gray-200 rounded-md"
+            className="text-black border-gray-200 rounded-md text-sm"
           >
-            <MapPin className="mr-2 h-4 w-4" />
             Find a center
           </Button>
           
           <Button 
             variant="default" 
-            className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b]"
+            className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b] text-sm gap-2"
           >
-            <Calendar className="mr-2 h-4 w-4" />
+            <Calendar className="h-4 w-4" />
             Book Appointment
           </Button>
         </div>
       </header>
 
       {/* Navigation */}
-      <nav className="bg-gray-50 px-6 md:px-20 py-2">
-        <ul className="flex gap-6 text-gray-700 text-sm">
-          <li className="py-2 px-1">
+      <nav className="bg-white px-6 md:px-20">
+        <ul className="flex gap-8 text-gray-700">
+          <li className="py-4">
             <Link href="/" className="hover:text-black">Home</Link>
           </li>
-          <li className="py-2 px-1">
+          <li className="py-4">
             <Link href="/about-us" className="hover:text-black">About us</Link>
           </li>
-          <li className="py-2 px-1">
+          <li className="py-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="link" className="p-0 h-auto font-normal text-sm text-gray-700 hover:text-black">
+                <Button variant="link" className="p-0 h-auto font-normal text-gray-700 hover:text-black">
                   Apply for VISAs
                   <ChevronDown className="ml-1 h-3 w-3" />
                 </Button>
@@ -88,54 +72,127 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
           </li>
-          <li className="py-2 px-1">
+          <li className="py-4">
             <Link href="/centers" className="hover:text-black">Our Centers</Link>
-          </li>
-          <li className="py-2 px-1">
-            <Link href="/information" className="hover:text-black">General Information</Link>
-          </li>
-          <li className="py-2 px-1">
-            <Link href="/track" className="hover:text-black">Track Applications</Link>
           </li>
         </ul>
       </nav>
 
-      {/* Main content */}
-      <main className="flex-1 bg-gray-50">
-        <div className="bg-white rounded-lg shadow-sm mx-6 md:mx-20 my-12 p-8">
-          {/* Partner info */}
-          <p className="text-gray-800 mb-16">
-            Skylane is official partner of Embassy of Morocco in India.
+      {/* Hero Section */}
+      <div className="relative px-6 md:px-20 py-10">
+        <div className="relative rounded-lg overflow-hidden mx-auto max-w-6xl">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
+          
+          <Image
+            src="/home/landing-hero-image.svg" 
+            alt="Morocco cityscape"
+            width={1400}
+            height={600}
+            className="w-full object-cover"
+          />
+          
+          <p className="absolute top-4 left-4 text-white/90 text-sm z-20">
+            *Skylane is official partner of Embassy of Morocco in India.
           </p>
-
-          {/* Welcome section */}
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-            <div>
-              <h2 className="text-gray-700 mb-1">Welcome to</h2>
-              <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-4xl md:text-5xl font-bold">Morocco</h1>
-                <Image 
-                  src="/morocco-flag.png" 
-                  alt="Morocco flag" 
-                  width={40} 
-                  height={26}
-                  className="rounded-sm"
-                />
+          
+          <div className="absolute bottom-0 left-0 right-0 p-8 pb-12 z-20 text-white">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-end">
+              <div>
+                <p className="text-lg mb-2">Welcome to</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <h1 className="text-4xl md:text-5xl font-bold text-white">Morocco</h1>
+                  <Image 
+                    src="/morocco-flag.svg" 
+                    alt="Morocco flag" 
+                    width={36}
+                    height={24}
+                    className="rounded-sm"
+                  />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-1">VISA Application Center</h1>
+                <p className="text-lg text-white">in India</p>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-1">VISA Application Center</h1>
-              <p className="text-xl text-gray-700">in India</p>
+              
+              <Button 
+                variant="outline"
+                className="bg-white text-black border-white rounded-md mt-6 md:mt-0 hover:bg-white/90"
+              >
+                Book Appointment
+              </Button>
             </div>
-            
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="text-black border-gray-200 rounded-md mt-6 md:mt-0"
-            >
-              Book Appointment
-            </Button>
           </div>
         </div>
-      </main>
+      </div>
+
+      {/* Application Process Section */}
+      <section className="py-16 px-6 md:px-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Quick & Easy Application Booking Process with Skylane</h2>
+        
+        <p className="text-gray-700 text-center max-w-4xl mx-auto mb-8">
+          Skylane is pleased to announce the opening of Morocco Visa Application Center (MVAC) at in India. All applicants residing in India (Indian citizens and Foreign Nationals) can apply at any of the above-mentioned MVACs by walking in and submitting their Visa applications along with passport, requisite documents, and relevant fees either through cash, NEFT, or demand draft. Applications submitted in Delhi and Mumbai will be assessed by The Morocco Embassy in New Delhi.
+        </p>
+
+        <div className="flex justify-center">
+          <Button 
+            variant="default" 
+            className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b] gap-2"
+          >
+            <Calendar className="h-4 w-4" />
+            Book Appointment
+          </Button>
+        </div>
+
+        {/* Application Steps */}
+        <div className="mt-16 relative flex flex-col lg:flex-row justify-between items-center max-w-6xl mx-auto">
+          {/* Connecting line */}
+          <div className="absolute top-8 left-0 right-0 h-[1px] bg-gray-200 hidden lg:block"></div>
+          
+          {/* Step 1 */}
+          <div className="flex flex-col items-center text-center relative">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+              <MapPin className="h-6 w-6 text-gray-700" />
+            </div>
+            <h3 className="font-medium mb-1">Select your</h3>
+            <p className="text-sm text-gray-600">Preferred City</p>
+          </div>
+          
+          {/* Step 2 */}
+          <div className="flex flex-col items-center text-center relative">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+              <FileText className="h-6 w-6 text-gray-700" />
+            </div>
+            <h3 className="font-medium mb-1">Identify your</h3>
+            <p className="text-sm text-gray-600">Visa type</p>
+          </div>
+          
+          {/* Step 3 */}
+          <div className="flex flex-col items-center text-center relative">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+              <Notebook className="h-6 w-6 text-gray-700" />
+            </div>
+            <h3 className="font-medium mb-1">Upload Passport &</h3>
+            <p className="text-sm text-gray-600">Verify details</p>
+          </div>
+          
+          {/* Step 4 */}
+          <div className="flex flex-col items-center text-center relative">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+              <Calendar className="h-6 w-6 text-gray-700" />
+            </div>
+            <h3 className="font-medium mb-1">Select your</h3>
+            <p className="text-sm text-gray-600">preferred slot</p>
+          </div>
+          
+          {/* Step 5 */}
+          <div className="flex flex-col items-center text-center relative">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+              <Building className="h-6 w-6 text-gray-700" />
+            </div>
+            <h3 className="font-medium mb-1">Visit us at your</h3>
+            <p className="text-sm text-gray-600">booked VAC</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
