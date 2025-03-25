@@ -1,103 +1,148 @@
+"use client";
+
 import Image from "next/image";
+import { Button } from "@nextui-org/button";
+import { Navbar, NavbarContent, NavbarItem, Link as NextUILink, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { MapPin, Calendar, ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="min-h-screen flex flex-col font-inter">
+      {/* Header */}
+      <header className="p-4 px-6 md:px-20 flex justify-between items-center border-b">
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link href="/">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/skylane-logo.png" 
+              alt="Skylane Logo"
+              width={150}
+              height={40}
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </Link>
+        </div>
+        
+        {/* Center text */}
+        <div className="hidden md:flex items-center gap-2">
+          <span className="text-gray-600">Apply visa to</span>
+          <div className="flex items-center gap-1">
+            <Image 
+              src="/morocco-flag.png" 
+              alt="Morocco flag" 
+              width={24} 
+              height={16}
+              className="rounded-sm"
+            />
+            <span className="font-medium">Morocco from India</span>
+          </div>
+        </div>
+        
+        {/* Action buttons */}
+        <div className="flex items-center gap-3">
+          <Button
+            variant="bordered"
+            className="text-black border-gray-200 rounded-md"
+            startContent={<MapPin size={18} />}
           >
-            Read our docs
-          </a>
+            Find a center
+          </Button>
+          
+          <Button 
+            color="primary" 
+            className="bg-[#0f172a] text-white rounded-md"
+            startContent={<Calendar size={18} />}
+          >
+            Book Appointment
+          </Button>
+        </div>
+      </header>
+
+      {/* Navigation */}
+      <Navbar className="bg-gray-50 px-6 md:px-20" maxWidth="full">
+        <NavbarContent className="gap-6 text-gray-700 text-sm">
+          <NavbarItem>
+            <Link href="/" className="hover:text-black">
+              Home
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/about-us" className="hover:text-black">
+              About us
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button 
+                  variant="light" 
+                  className="p-0 bg-transparent min-w-0 h-auto font-normal text-sm text-gray-700 hover:text-black"
+                  endContent={<ChevronDown size={14} />}
+                >
+                  Apply for VISAs
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Visa application options">
+                <DropdownItem key="tourist">Tourist Visa</DropdownItem>
+                <DropdownItem key="business">Business Visa</DropdownItem>
+                <DropdownItem key="student">Student Visa</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/centers" className="hover:text-black">
+              Our Centers
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/information" className="hover:text-black">
+              General Information
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/track" className="hover:text-black">
+              Track Applications
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+
+      {/* Main content */}
+      <main className="flex-1 bg-gray-50">
+        <div className="bg-white rounded-lg shadow-sm mx-6 md:mx-20 my-12 p-8">
+          {/* Partner info */}
+          <p className="text-gray-800 mb-16">
+            Skylane is official partner of Embassy of Morocco in India.
+          </p>
+
+          {/* Welcome section */}
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+            <div>
+              <h2 className="text-gray-700 mb-1">Welcome to</h2>
+              <div className="flex items-center gap-2 mb-1">
+                <h1 className="text-4xl md:text-5xl font-bold">Morocco</h1>
+                <Image 
+                  src="/morocco-flag.png" 
+                  alt="Morocco flag" 
+                  width={40} 
+                  height={26}
+                  className="rounded-sm"
+                />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-1">VISA Application Center</h1>
+              <p className="text-xl text-gray-700">in India</p>
+            </div>
+            
+            <Button 
+              size="lg" 
+              className="bg-white text-black border border-gray-200 rounded-md mt-6 md:mt-0"
+            >
+              Book Appointment
+            </Button>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
