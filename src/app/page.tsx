@@ -1,8 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@nextui-org/button";
-import { Navbar, NavbarContent, NavbarItem, Link as NextUILink, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { Button } from "@/components/ui/button";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 import { MapPin, Calendar, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
@@ -15,7 +20,7 @@ export default function Home() {
         <div className="flex items-center">
           <Link href="/">
             <Image
-              src="/skylane-logo.png" 
+              src="/skylane_logo.svg" 
               alt="Skylane Logo"
               width={150}
               height={40}
@@ -29,7 +34,7 @@ export default function Home() {
           <span className="text-gray-600">Apply visa to</span>
           <div className="flex items-center gap-1">
             <Image 
-              src="/morocco-flag.png" 
+              src="/morocco-flag.svg" 
               alt="Morocco flag" 
               width={24} 
               height={16}
@@ -42,71 +47,58 @@ export default function Home() {
         {/* Action buttons */}
         <div className="flex items-center gap-3">
           <Button
-            variant="bordered"
+            variant="outline"
             className="text-black border-gray-200 rounded-md"
-            startContent={<MapPin size={18} />}
           >
+            <MapPin className="mr-2 h-4 w-4" />
             Find a center
           </Button>
           
           <Button 
-            color="primary" 
-            className="bg-[#0f172a] text-white rounded-md"
-            startContent={<Calendar size={18} />}
+            variant="default" 
+            className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b]"
           >
+            <Calendar className="mr-2 h-4 w-4" />
             Book Appointment
           </Button>
         </div>
       </header>
 
       {/* Navigation */}
-      <Navbar className="bg-gray-50 px-6 md:px-20" maxWidth="full">
-        <NavbarContent className="gap-6 text-gray-700 text-sm">
-          <NavbarItem>
-            <Link href="/" className="hover:text-black">
-              Home
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/about-us" className="hover:text-black">
-              About us
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button 
-                  variant="light" 
-                  className="p-0 bg-transparent min-w-0 h-auto font-normal text-sm text-gray-700 hover:text-black"
-                  endContent={<ChevronDown size={14} />}
-                >
+      <nav className="bg-gray-50 px-6 md:px-20 py-2">
+        <ul className="flex gap-6 text-gray-700 text-sm">
+          <li className="py-2 px-1">
+            <Link href="/" className="hover:text-black">Home</Link>
+          </li>
+          <li className="py-2 px-1">
+            <Link href="/about-us" className="hover:text-black">About us</Link>
+          </li>
+          <li className="py-2 px-1">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="link" className="p-0 h-auto font-normal text-sm text-gray-700 hover:text-black">
                   Apply for VISAs
+                  <ChevronDown className="ml-1 h-3 w-3" />
                 </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Visa application options">
-                <DropdownItem key="tourist">Tourist Visa</DropdownItem>
-                <DropdownItem key="business">Business Visa</DropdownItem>
-                <DropdownItem key="student">Student Visa</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/centers" className="hover:text-black">
-              Our Centers
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/information" className="hover:text-black">
-              General Information
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/track" className="hover:text-black">
-              Track Applications
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>Tourist Visa</DropdownMenuItem>
+                <DropdownMenuItem>Business Visa</DropdownMenuItem>
+                <DropdownMenuItem>Student Visa</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </li>
+          <li className="py-2 px-1">
+            <Link href="/centers" className="hover:text-black">Our Centers</Link>
+          </li>
+          <li className="py-2 px-1">
+            <Link href="/information" className="hover:text-black">General Information</Link>
+          </li>
+          <li className="py-2 px-1">
+            <Link href="/track" className="hover:text-black">Track Applications</Link>
+          </li>
+        </ul>
+      </nav>
 
       {/* Main content */}
       <main className="flex-1 bg-gray-50">
@@ -136,7 +128,8 @@ export default function Home() {
             
             <Button 
               size="lg" 
-              className="bg-white text-black border border-gray-200 rounded-md mt-6 md:mt-0"
+              variant="outline"
+              className="text-black border-gray-200 rounded-md mt-6 md:mt-0"
             >
               Book Appointment
             </Button>
