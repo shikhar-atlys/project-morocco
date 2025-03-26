@@ -8,8 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building } from "lucide-react";
+import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building, Castle, MountainSnow, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 
 export default function Home() {
   return (
@@ -80,7 +81,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <div className="relative px-6 md:px-20 py-10">
-        <div className="relative rounded-lg overflow-hidden mx-auto max-w-6xl">
+        <div className="relative rounded-lg overflow-hidden mx-auto">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
           
           <Image
@@ -147,7 +148,7 @@ export default function Home() {
           </div>
 
           {/* Application Steps */}
-          <div className="mt-16 relative flex flex-col lg:flex-row justify-between items-center max-w-6xl mx-auto">
+          <div className="mt-16 relative flex flex-col lg:flex-row justify-between items-center pb-10 max-w-6xl mx-auto">
             {/* Connecting line */}
             <div className="absolute top-8 left-[60px] right-[60px] h-[1px] bg-gray-200 hidden lg:block"></div>
             
@@ -203,21 +204,46 @@ export default function Home() {
       <section className="py-16 px-6 md:px-20">
         <h2 className="text-3xl md:text-4xl font-bold mb-12">Why visit morocco 🇲🇦</h2>
         
-        <div className="flex flex-col gap-6">
-          {/* Rich Cultural Heritage */}
-          <div className="flex flex-row items-center justify-around gap-6">
-            <div className="flex items-center gap-6">
+        <div className="flex flex-row justify-between">
+
+          <div className="flex flex-col gap-15 items-start m-10">
+            <div className="flex items-center">
               <div className="min-w-[40px]">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M24.5 10.5H3.5V24.5H24.5V10.5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3.5 10.5L7 3.5H21L24.5 10.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M10.5 10.5V24.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M17.5 10.5V24.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3.5 17.5H24.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <Castle width={28} height={28} />
               </div>
-              <h3 className="text-4xl md:text-5xl font-bold">RICH CULTURAL HERITAGE</h3>
+              <h3 className="text-4xl md:text-4xl font-bold">RICH CULTURAL HERITAGE</h3>
             </div>
+
+            <div className="rounded-full overflow-hidden">
+              <Image
+                src="/home/diverse-landscapes.svg" 
+                alt="Morocco mountains with snow"
+                width={600}
+                height={300}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="flex items-center">
+              <div className="min-w-[40px]">
+                <UtensilsCrossed width={28} height={28} />
+              </div>
+              <h3 className="text-4xl md:text-4xl font-bold">CULINARY DELIGHTS</h3>
+            </div>
+
+            <div className="rounded-full overflow-hidden">
+              <Image
+                src="/home/water-sport.svg" 
+                alt="Water sports in Morocco"
+                width={600}
+                height={300}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          
+          {/* Diverse Landscapes */}
+          <div className="flex flex-col items-end gap-15">
             <div className="rounded-full overflow-hidden">
               <Image
                 src="/home/rich-cultural-heritage.svg" 
@@ -227,41 +253,12 @@ export default function Home() {
                 className="w-full h-full object-cover"
               />
             </div>
-          </div>
-          
-          {/* Diverse Landscapes */}
-          <div className="flex flex-row items-center justify-around gap-6">
-            <div className="rounded-full overflow-hidden md:order-3">
-              <Image
-                src="/home/diverse-landscapes.svg" 
-                alt="Morocco mountains with snow"
-                width={600}
-                height={300}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex items-center gap-6 md:order-4">
-              <div className="min-w-[40px]">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 3L12 7L16 3" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 7V17" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M2 17L12 21L22 17" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold">DIVERSE LANDSCAPES</h3>
-            </div>
-          </div>
-          
-          {/* Culinary Delights */}
-          <div className="flex flex-row items-center justify-around gap-6">
+
             <div className="flex items-center gap-6">
-              <div className="min-w-[40px]">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 11L21 3L13 21L11 13L3 11Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold">CULINARY DELIGHTS</h3>
+              <h3 className="text-4xl md:text-4xl font-bold">DIVERSE LANDSCAPES</h3>
+              <MountainSnow width={28} height={28} />
             </div>
+
             <div className="rounded-full overflow-hidden">
               <Image
                 src="/home/culinary-delights.svg" 
@@ -271,20 +268,9 @@ export default function Home() {
                 className="w-full h-full object-cover"
               />
             </div>
-          </div>
-          
-          {/* Water Sports */}
-          <div className="flex flex-row items-center justify-around gap-6">
-            <div className="rounded-full overflow-hidden md:order-7">
-              <Image
-                src="/home/water-sport.svg" 
-              alt="Water sports in Morocco"
-              width={600}
-              height={300}
-              className="w-full h-full object-cover"
-            />
-            </div>
-            <div className="flex items-center gap-6 md:order-8">
+
+            <div className="flex items-center gap-6">
+              <h3 className="text-4xl md:text-4xl font-bold">WATER SPORTS</h3>
               <div className="min-w-[40px]">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 12H4C5.06087 12 6.07828 12.4214 6.82843 13.1716C7.57857 13.9217 8 14.9391 8 16C8 17.0609 8.42143 18.0783 9.17157 18.8284C9.92172 19.5786 10.9391 20 12 20C13.0609 20 14.0783 19.5786 14.8284 18.8284C15.5786 18.0783 16 17.0609 16 16C16 14.9391 16.4214 13.9217 17.1716 13.1716C17.9217 12.4214 18.9391 12 20 12H22" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -293,9 +279,110 @@ export default function Home() {
                   <path d="M10.5 5.5L13.5 10.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-4xl md:text-5xl font-bold">WATER SPORTS</h3>
             </div>
           </div>
+
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-16 px-6 md:px-20">
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col gap-2">
+            <Image src="/morocco-flag.svg" alt="Morocco flag" width={36} height={24} />
+            <h2 className="text-5xl md:text-5xl font-extrabold">Morocco</h2>
+            <div className="text-lg md:text-lg font-bold text-[#64748B]">The Land of Light</div>
+          </div>
+          <div className="flex flex-wrap max-w-[600px] text-[14px] text-[#0F172A]">
+            <p>Morocco, often referred to as the &quot;Land of Light,&quot; offers a mesmerizing blend of history, culture, and natural beauty that captivates travelers from around the world.</p>
+          </div>
+        </div>
+        
+        
+        <div className="mt-8">
+          <Carousel className="w-full">
+            <CarouselContent>
+              <CarouselItem className="md:basis-full">
+                <div className="relative rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 z-10"></div>
+                  <Image 
+                    src="/ait-benhaddou.jpg" 
+                    alt="Aït Benhaddou" 
+                    width={1200} 
+                    height={600}
+                    className="w-full h-[600px] object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
+                    <h3 className="text-3xl font-bold mb-2">Aït Benhaddou</h3>
+                    <p className="text-white/90 text-sm max-w-3xl">
+                      Aït Benhaddou, a fortified village in Morocco, showcases stunning earthen clay architecture and served as a key stop along the ancient caravan route from the Sahara to Marrakesh. Recognized as a UNESCO World Heritage Site since 1987, it remains an iconic symbol of Moroccan heritage.
+                    </p>
+                    <div className="flex mt-3">
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem className="md:basis-full">
+                <div className="relative rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 z-10"></div>
+                  <Image 
+                    src="/home/carousal-frame-1-ben.svg" 
+                    alt="Chefchaouen" 
+                    width={1200} 
+                    height={600}
+                    className="w-full h-[600px] object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
+                    <h3 className="text-3xl font-bold mb-2">Chefchaouen</h3>
+                    <p className="text-white/90 text-sm max-w-3xl">
+                      Known as the &quot;Blue Pearl of Morocco,&quot; Chefchaouen is famous for its striking blue-washed buildings nestled in the Rif Mountains. This picturesque town offers a peaceful atmosphere, stunning mountain views, and a unique blend of Moroccan and Andalusian culture.
+                    </p>
+                    <div className="flex mt-3">
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem className="md:basis-full">
+                <div className="relative rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 z-10"></div>
+                  <Image 
+                    src="/home/carousal-frame-2-chef.svg" 
+                    alt="Marrakech" 
+                    width={1200} 
+                    height={600}
+                    className="w-full h-[600px] object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
+                    <h3 className="text-3xl font-bold mb-2">Marrakech</h3>
+                    <p className="text-white/90 text-sm max-w-3xl">
+                      Marrakech, the &quot;Red City,&quot; is a vibrant cultural hub featuring magnificent palaces, bustling souks, and the famous Jemaa el-Fnaa square. With its historic medina, stunning gardens, and rich culinary scene, Marrakech offers visitors an unforgettable immersion into Moroccan culture.
+                    </p>
+                    <div className="flex mt-3">
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            
+            <div className="absolute z-30 flex justify-between w-full bottom-1/2">
+              <CarouselPrevious className="h-10 w-10 rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30" />
+              <CarouselNext className="h-10 w-10 rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30" />
+            </div>
+          </Carousel>
         </div>
       </section>
     </div>
