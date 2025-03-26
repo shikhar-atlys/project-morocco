@@ -95,7 +95,7 @@ export default function Home() {
             *Skylane is official partner of Embassy of Morocco in India.
           </p>
           
-          <div className="absolute bottom-0 left-0 right-0 p-8 pb-12 z-20 text-white">
+          <div className="absolute bottom-0 left-0 right-0 p-8 pb-12 z-20 text-white hero-overlay">
             <div className="flex flex-col md:flex-row md:justify-between md:items-end">
               <div>
                 <p className="text-lg mb-2">Welcome to</p>
@@ -125,76 +125,79 @@ export default function Home() {
       </div>
 
       {/* Application Process Section */}
-      <section className="py-16 px-6 md:px-20">
-        <div className="bg-[#FBFCFD] py-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Quick & Easy Application Booking Process with Skylane</h2>
-          
-          <p className="text-gray-700 text-center max-w-4xl mx-auto mb-8">
-            Skylane is pleased to announce the opening of Morocco Visa Application Center (MVAC) at in India. All applicants residing in India (Indian citizens and Foreign Nationals) can apply at any of the above-mentioned MVACs by walking in and submitting their Visa applications along with passport, requisite documents, and relevant fees either through cash, NEFT, or demand draft. Applications submitted in Delhi and Mumbai will be assessed by The Morocco Embassy in New Delhi.
-          </p>
+      <div className="py-16 px-6 md:px-20">
+        <section className="border-2 border-[rgba(247,249,248,1)] rounded-[20px]">
+        
+          <div className="bg-[#FBFCFD] py-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Quick & Easy Application Booking Process with Skylane</h2>
+            
+            <p className="text-gray-700 text-center max-w-4xl mx-auto mb-8">
+              Skylane is pleased to announce the opening of Morocco Visa Application Center (MVAC) at in India. All applicants residing in India (Indian citizens and Foreign Nationals) can apply at any of the above-mentioned MVACs by walking in and submitting their Visa applications along with passport, requisite documents, and relevant fees either through cash, NEFT, or demand draft. Applications submitted in Delhi and Mumbai will be assessed by The Morocco Embassy in New Delhi.
+            </p>
 
-          <div className="flex justify-center">
-            <Button 
-              variant="default" 
-              className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b] gap-2"
-            >
-              <Calendar className="h-4 w-4" />
-              Book Appointment
-            </Button>
+            <div className="flex justify-center">
+              <Button 
+                variant="default" 
+                className="bg-[#0f172a] text-white rounded-md hover:bg-[#1e293b] gap-2"
+              >
+                <Calendar className="h-4 w-4" />
+                Book Appointment
+              </Button>
+            </div>
           </div>
-        </div>
 
-        {/* Application Steps */}
-        <div className="mt-16 relative flex flex-col lg:flex-row justify-between items-center max-w-6xl mx-auto">
-          {/* Connecting line */}
-          <div className="absolute top-8 left-0 right-0 h-[1px] bg-gray-200 hidden lg:block"></div>
-          
-          {/* Step 1 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
-              <MapPin className="h-6 w-6 text-gray-700" />
+          {/* Application Steps */}
+          <div className="mt-16 relative flex flex-col lg:flex-row justify-between items-center max-w-6xl mx-auto">
+            {/* Connecting line */}
+            <div className="absolute top-8 left-[60px] right-[60px] h-[1px] bg-gray-200 hidden lg:block"></div>
+            
+            {/* Step 1 */}
+            <div className="flex flex-col items-center text-center relative">
+              <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+                <MapPin className="h-6 w-6 text-gray-700" />
+              </div>
+              <h3 className="font-medium mb-1">Select your</h3>
+              <p className="text-sm text-gray-600">Preferred City</p>
             </div>
-            <h3 className="font-medium mb-1">Select your</h3>
-            <p className="text-sm text-gray-600">Preferred City</p>
-          </div>
-          
-          {/* Step 2 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
-              <FileText className="h-6 w-6 text-gray-700" />
+            
+            {/* Step 2 */}
+            <div className="flex flex-col items-center text-center relative">
+              <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+                <FileText className="h-6 w-6 text-gray-700" />
+              </div>
+              <h3 className="font-medium mb-1">Identify your</h3>
+              <p className="text-sm text-gray-600">Visa type</p>
             </div>
-            <h3 className="font-medium mb-1">Identify your</h3>
-            <p className="text-sm text-gray-600">Visa type</p>
-          </div>
-          
-          {/* Step 3 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
-              <Notebook className="h-6 w-6 text-gray-700" />
+            
+            {/* Step 3 */}
+            <div className="flex flex-col items-center text-center relative">
+              <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+                <Notebook className="h-6 w-6 text-gray-700" />
+              </div>
+              <h3 className="font-medium mb-1">Upload Passport &</h3>
+              <p className="text-sm text-gray-600">Verify details</p>
             </div>
-            <h3 className="font-medium mb-1">Upload Passport &</h3>
-            <p className="text-sm text-gray-600">Verify details</p>
-          </div>
-          
-          {/* Step 4 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
-              <Calendar className="h-6 w-6 text-gray-700" />
+            
+            {/* Step 4 */}
+            <div className="flex flex-col items-center text-center relative">
+              <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+                <Calendar className="h-6 w-6 text-gray-700" />
+              </div>
+              <h3 className="font-medium mb-1">Select your</h3>
+              <p className="text-sm text-gray-600">preferred slot</p>
             </div>
-            <h3 className="font-medium mb-1">Select your</h3>
-            <p className="text-sm text-gray-600">preferred slot</p>
-          </div>
-          
-          {/* Step 5 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
-              <Building className="h-6 w-6 text-gray-700" />
+            
+            {/* Step 5 */}
+            <div className="flex flex-col items-center text-center relative">
+              <div className="bg-gray-100 p-4 rounded-full mb-4 z-10 relative">
+                <Building className="h-6 w-6 text-gray-700" />
+              </div>
+              <h3 className="font-medium mb-1">Visit us at your</h3>
+              <p className="text-sm text-gray-600">booked VAC</p>
             </div>
-            <h3 className="font-medium mb-1">Visit us at your</h3>
-            <p className="text-sm text-gray-600">booked VAC</p>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Why visit Morocco Section */}
       <section className="py-16 px-6 md:px-20">

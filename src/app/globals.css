@@ -129,3 +129,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.hero-overlay {
+  background: linear-gradient(0.88deg, rgba(255, 255, 255, 0) -0.76%, rgba(59, 59, 59, 0.1) 53.03%, rgba(255, 255, 255, 0) 101.76%);
+  background-blend-mode: overlay;
+  backdrop-filter: blur(50px);
+}
