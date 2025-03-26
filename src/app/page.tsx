@@ -10,9 +10,68 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building, Castle, MountainSnow, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  type CarouselApi
+} from "@/components/ui/carousel";
+import { useState, useEffect } from "react";
+
+// Carousel data configuration
+const carouselItems = [
+  {
+    id: 0,
+    title: "Chefchaouen",
+    description: "Known as the \"Blue Pearl of Morocco,\" Chefchaouen is famous for its striking blue-washed buildings nestled in the Rif Mountains. This picturesque town offers a peaceful atmosphere, stunning mountain views, and a unique blend of Moroccan and Andalusian culture.",
+    imageSrc: "/home/carousal-frame-1-ben.svg",
+    imageAlt: "Chefchaouen",
+  },
+  {
+    id: 1,
+    title: "Marrakech",
+    description: "Marrakech, the \"Red City,\" is a vibrant cultural hub featuring magnificent palaces, bustling souks, and the famous Jemaa el-Fnaa square. With its historic medina, stunning gardens, and rich culinary scene, Marrakech offers visitors an unforgettable immersion into Moroccan culture.",
+    imageSrc: "/home/carousal-frame-2-chef.svg",
+    imageAlt: "Marrakech",
+  }
+];
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+  
+  useEffect(() => {
+    if (!api) return;
+    
+    const onSelect = () => {
+      setCurrentSlide(api.selectedScrollSnap());
+    };
+    
+    api.on("select", onSelect);
+    
+    // Initial selection
+    onSelect();
+    
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+  
+  // Auto-rotate carousel
+  useEffect(() => {
+    if (!api) return;
+    
+    const interval = setInterval(() => {
+      if (currentSlide === carouselItems.length - 1) {
+        api.scrollTo(0);
+      } else {
+        api.scrollNext();
+      }
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [api, currentSlide]);
+
   return (
     <div className="min-h-screen flex flex-col font-inter">
       {/* Header */}
@@ -300,88 +359,64 @@ export default function Home() {
         
         
         <div className="mt-8">
-          <Carousel className="w-full">
+          <Carousel 
+            className="w-full" 
+            setApi={setApi}
+          >
             <CarouselContent>
-              <CarouselItem className="md:basis-full">
-                <div className="relative rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 z-10"></div>
-                  <Image 
-                    src="/ait-benhaddou.jpg" 
-                    alt="Aït Benhaddou" 
-                    width={1200} 
-                    height={600}
-                    className="w-full h-[600px] object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
-                    <h3 className="text-3xl font-bold mb-2">Aït Benhaddou</h3>
-                    <p className="text-white/90 text-sm max-w-3xl">
-                      Aït Benhaddou, a fortified village in Morocco, showcases stunning earthen clay architecture and served as a key stop along the ancient caravan route from the Sahara to Marrakesh. Recognized as a UNESCO World Heritage Site since 1987, it remains an iconic symbol of Moroccan heritage.
-                    </p>
-                    <div className="flex mt-3">
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
+              {carouselItems.map((item) => (
+                <CarouselItem key={item.id} className="md:basis-full">
+                  <div className="relative rounded-xl overflow-hidden">
+                    <div className="absolute inset-0 bg-black/20 z-10"></div>
+                    <Image 
+                      src={item.imageSrc} 
+                      alt={item.imageAlt} 
+                      width={1200} 
+                      height={600}
+                      className="w-full h-[600px] object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white bg-gradient-to-t from-black/40 to-transparent backdrop-blur-sm" 
+                         style={{ 
+                           background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) -10.51%, rgba(0, 0, 0, 0.4) 100%)',
+                           backdropFilter: 'blur(52px)'
+                         }}>
+                      <h3 className="text-3xl font-bold mb-2">{item.title}</h3>
+                      <p className="text-white/90 text-sm max-w-3xl">
+                        {item.description}
+                      </p>
+                      <div className="flex mt-3 items-center justify-between">
+                        <div className="flex">
+                          {carouselItems.map((dot) => (
+                            <span 
+                              key={dot.id}
+                              className={`h-1.5 w-1.5 rounded-full mx-0.5 ${currentSlide === dot.id ? "bg-white" : "bg-white/20"}`}
+                            />
+                          ))}
+                        </div>
+                        <div className="flex gap-2">
+                          <button 
+                            onClick={() => api?.scrollPrev()}
+                            className="h-10 w-10 flex items-center justify-center rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </button>
+                          <button 
+                            onClick={() => api?.scrollNext()}
+                            className="h-10 w-10 flex items-center justify-center rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CarouselItem>
-              
-              <CarouselItem className="md:basis-full">
-                <div className="relative rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 z-10"></div>
-                  <Image 
-                    src="/home/carousal-frame-1-ben.svg" 
-                    alt="Chefchaouen" 
-                    width={1200} 
-                    height={600}
-                    className="w-full h-[600px] object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
-                    <h3 className="text-3xl font-bold mb-2">Chefchaouen</h3>
-                    <p className="text-white/90 text-sm max-w-3xl">
-                      Known as the &quot;Blue Pearl of Morocco,&quot; Chefchaouen is famous for its striking blue-washed buildings nestled in the Rif Mountains. This picturesque town offers a peaceful atmosphere, stunning mountain views, and a unique blend of Moroccan and Andalusian culture.
-                    </p>
-                    <div className="flex mt-3">
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-              
-              <CarouselItem className="md:basis-full">
-                <div className="relative rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 z-10"></div>
-                  <Image 
-                    src="/home/carousal-frame-2-chef.svg" 
-                    alt="Marrakech" 
-                    width={1200} 
-                    height={600}
-                    className="w-full h-[600px] object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
-                    <h3 className="text-3xl font-bold mb-2">Marrakech</h3>
-                    <p className="text-white/90 text-sm max-w-3xl">
-                      Marrakech, the &quot;Red City,&quot; is a vibrant cultural hub featuring magnificent palaces, bustling souks, and the famous Jemaa el-Fnaa square. With its historic medina, stunning gardens, and rich culinary scene, Marrakech offers visitors an unforgettable immersion into Moroccan culture.
-                    </p>
-                    <div className="flex mt-3">
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white/20 h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                      <span className="bg-white h-1.5 w-1.5 rounded-full mx-0.5"></span>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
+                </CarouselItem>
+              ))}
             </CarouselContent>
-            
-            <div className="absolute z-30 flex justify-between w-full bottom-1/2">
-              <CarouselPrevious className="h-10 w-10 rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30" />
-              <CarouselNext className="h-10 w-10 rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30" />
-            </div>
           </Carousel>
         </div>
       </section>
