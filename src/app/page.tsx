@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building, Castle, MountainSnow, UtensilsCrossed } from "lucide-react";
+import { MapPin, Calendar, ChevronDown, FileText, Notebook, Building, Castle, MountainSnow, UtensilsCrossed, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { 
   Carousel, 
@@ -33,6 +33,27 @@ const carouselItems = [
     description: "Marrakech, the \"Red City,\" is a vibrant cultural hub featuring magnificent palaces, bustling souks, and the famous Jemaa el-Fnaa square. With its historic medina, stunning gardens, and rich culinary scene, Marrakech offers visitors an unforgettable immersion into Moroccan culture.",
     imageSrc: "/home/carousal-frame-2-chef.svg",
     imageAlt: "Marrakech",
+  },
+  {
+    id: 2,
+    title: "Fes",
+    description: "Fes is one of Morocco's oldest and most historically rich cities, famous for its medieval architecture and its status as the cultural and spiritual heart of the country. The Fes el-Bali medina is a UNESCO World Heritage site, & the city is home to the world's oldest university, Al Quaraouiyine.",
+    imageSrc: "/home/carousal-frame-3-res.svg",
+    imageAlt: "Fes",
+  },
+  {
+    id: 3,
+    title: "Sahara Desert",
+    description: "A trip to the Sahara Desert is an unforgettable experience, and Merzouga is one of the best spots to explore it. You can take camel treks into the dunes, enjoy stargazing in the vast desert, & visit Berber villages. The experience of staying overnight in a desert camp is a highlight of the trip.",
+    imageSrc: "/home/carousal-frame-4-sahara.svg",
+    imageAlt: "Sahara Desert",
+  },
+  {
+    id: 4,
+    title: "Atlas Mountains",
+    description: "The Atlas Mountains are a stunning range that stretches across Morocco, providing dramatic landscapes, traditional Berber villages, and opportunities for hiking. A visit to Toubkal National Park, home to Mount Toubkal is highly recommended for adventure lovers.",
+    imageSrc: "/home/carousal-frame-5-atlas.svg",
+    imageAlt: "Atlas Mountains",
   }
 ];
 
@@ -395,20 +416,28 @@ export default function Home() {
                         </div>
                         <div className="flex gap-2">
                           <button 
-                            onClick={() => api?.scrollPrev()}
+                            onClick={() => {
+                              if (currentSlide === 0) {
+                                api?.scrollTo(carouselItems.length - 1);
+                              } else {
+                                api?.scrollPrev();
+                              }
+                            }}
                             className="h-10 w-10 flex items-center justify-center rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30"
                           >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            <ChevronLeft size={16} />
                           </button>
                           <button 
-                            onClick={() => api?.scrollNext()}
+                            onClick={() => {
+                              if (currentSlide === carouselItems.length - 1) {
+                                api?.scrollTo(0);
+                              } else {
+                                api?.scrollNext();
+                              }
+                            }}
                             className="h-10 w-10 flex items-center justify-center rounded-full bg-white/20 border-0 text-white backdrop-blur-sm hover:bg-white/30"
                           >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            <ChevronRight size={16} />
                           </button>
                         </div>
                       </div>
